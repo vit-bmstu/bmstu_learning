@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+</head>
+<body>
+<h2>Сервис управления новостными сообщениями</h2>
+
+&nbsp; &nbsp; &nbsp; Заголовок &nbsp; &nbsp; &nbsp;
+&nbsp;&nbsp; &nbsp; &nbsp;Текст сообщения&nbsp;&nbsp;
+&nbsp;Ссылка на фото&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp;&nbsp;Автор&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Блог
+<form method="post" action="/add_message">
+    <input type="text" name="header">
+    <input type="text" name="text">
+    <input type="text" name="link">
+    <input type="text" name="author">
+    <input type="text" name="blog">
+    <button type="submit">Добавить новость</button>
+</form>
+&nbsp; &nbsp; &nbsp; ID новости &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Заголовок&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;Текст сообщения&nbsp; &nbsp;&nbsp;&nbsp;Ссылка на фото&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;Автор&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Блог
+<form method="post" action="/update_message">
+    <input type="text" name="id_up">
+    <input type="text" name="header1">
+    <input type="text" name="text1">
+    <input type="text" name="link1">
+    <input type="text" name="author1">
+    <input type="text" name="blog1">
+    <button type="submit">Изменить новость</button>
+</form>
+
+&nbsp; &nbsp; &nbsp; ID новости &nbsp; &nbsp; &nbsp;
+<form method="post" action="/del_message">
+    <input type="text" name="id">
+    <button type="submit">Удалить новость</button>
+</form>
+
+<h3>Лента новостей</h3>
+<p>{% for news in messages|sort(attribute='id') %}</p>
+    <div>id{{ news.id }}&nbsp;</span>
+        <span style="color: #ff0000;"><strong>{{ news.header }}</strong>&nbsp;</span>
+    <span style="color: #000000;"><strong>{{ news.text }}</strong></span>&nbsp;
+    <span style="color: #0000ff;"><strong>{{ news.link }}</strong></span>&nbsp;
+    {% for blog in news.blogs %}
+        <span style="color: #008000;"><strong>{{ blog.title }}</strong></span>
+    {% endfor %}
+    {% for author in news.authors %}
+        <span style="color: #000080;"><strong>{{ author.name }}</strong></span>
+    {% endfor %}</div>
+<p>{% endfor %}</p>
+
+
+</body>
+</html>
